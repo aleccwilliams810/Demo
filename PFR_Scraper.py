@@ -1,5 +1,5 @@
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, SoupStrainer
 from functools import lru_cache
 import pandas as pd
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
