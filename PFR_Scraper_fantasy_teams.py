@@ -1,12 +1,9 @@
 import requests
-from bs4 import BeautifulSoup, SoupStrainer
-from functools import lru_cache
-import pandas as pd
-from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
-from multiprocessing import get_context
-import re
 from typing import List
-
+from bs4 import BeautifulSoup, SoupStrainer
+import pandas as pd
+from concurrent.futures import ThreadPoolExecutor
+from functools import lru_cache
 
 class DataScraper:
     def __init__(self, years: List[int]):
