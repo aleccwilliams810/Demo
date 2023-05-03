@@ -47,7 +47,7 @@ def create_and_evaluate_model(pos, merged_data_scaled, param_grid, n_folds, n_fe
 
 
     model = KerasRegressor(
-        build_fn=create_model,
+        model=create_model,
         input_shape=(n_features,),
         epochs=100,
         batch_size=10,
