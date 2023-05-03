@@ -19,7 +19,7 @@ def create_model(input_shape, neurons=64, dropout_rate=0.1, optimizer='adam'):
     return model
 
 
-    def create_and_evaluate_model(pos, merged_data_scaled, param_grid, n_folds, n_features, dropout_rate):
+def create_and_evaluate_model(pos, merged_data_scaled, param_grid, n_folds, n_features, dropout_rate):
     print(f'Creating model for position: {pos}')
 
     train_data = merged_data_scaled[(merged_data_scaled['Year'] < 2020) & (merged_data_scaled['FantPos'] == pos)]
