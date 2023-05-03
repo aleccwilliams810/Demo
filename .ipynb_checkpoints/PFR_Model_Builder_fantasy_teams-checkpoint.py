@@ -3,7 +3,7 @@ import tensorflow as tf
 from sklearn.linear_model import LinearRegression
 from sklearn.feature_selection import RFE
 from sklearn.model_selection import GridSearchCV
-from keras.wrappers.scikit_learn import KerasRegressor
+from scikeras.wrappers import KerasRegressor
 
 #create_model() creates a Keras model with specified hyperparameters
 def create_model(input_shape, neurons=64, dropout_rate=0.1, optimizer='adam'):
@@ -19,9 +19,8 @@ def create_model(input_shape, neurons=64, dropout_rate=0.1, optimizer='adam'):
     return model
 
 
-def create_and_evaluate_model(args):
-    pos, merged_data_scaled, param_grid, n_folds, n_features, kwargs = args
-    print('Creating model for position:', pos)
+    def create_and_evaluate_model(pos, merged_data_scaled, param_grid, n_folds, n_features, dropout_rate):
+    print(f'Creating model for position: {pos}')
 
     train_data = merged_data_scaled[(merged_data_scaled['Year'] < 2020) & (merged_data_scaled['FantPos'] == pos)]
     test_data = merged_data_scaled[(merged_data_scaled['Year'] < 2022) & (~merged_data_scaled.index.isin(train_data.index)) & (merged_data_scaled['FantPos'] == pos)]
