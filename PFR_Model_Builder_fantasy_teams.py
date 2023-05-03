@@ -20,7 +20,7 @@ def create_model(input_shape, neurons=64, dropout_rate=0.1, optimizer='adam'):
 
 
 def create_and_evaluate_model(pos, merged_data_scaled, param_grid, n_folds, n_features, dropout_rate=0.1):
-    print(f'Creating model for position: {pos}')
+    print(f'Creating model for position: {pos}', flush=True)
 
     train_data = merged_data_scaled[(merged_data_scaled['Year'] < 2020) & (merged_data_scaled['FantPos'] == pos)]
     test_data = merged_data_scaled[(merged_data_scaled['Year'] < 2022) & (~merged_data_scaled.index.isin(train_data.index)) & (merged_data_scaled['FantPos'] == pos)]
@@ -35,7 +35,7 @@ def create_and_evaluate_model(pos, merged_data_scaled, param_grid, n_folds, n_fe
     rfe.fit(X_train, y_train)
 
     feature_index = rfe.get_support(indices=True)
-    print(f'Selected features for {pos}: {feature_index}')
+    print(f'Selected features for {pos}: {feature_index}', flush=True)
 
     X_train = X_train.iloc[:, feature_index]
     X_test = X_test.iloc[:, feature_index]
@@ -60,14 +60,14 @@ def create_and_evaluate_model(pos, merged_data_scaled, param_grid, n_folds, n_fe
     best_params = grid_result.best_params_
     best_score = -grid_result.best_score_
 
-    print("Best Parameters:", best_params)
-    print("Best MSE:", best_score)
+    print("Best Parameters:", best_params, flush=True)
+    print("Best MSE:", best_score, flush=True)
 
     final_model = create_model(input_shape=(X_train.shape[1],), dropout_rate=best_params['dropout_rate'], optimizer=best_params['optimizer'])
     final_model.fit(X_train, y_train, epochs=best_params['epochs'], batch_size=best_params['batch_size'], verbose=0)
 
     mse, mae = final_model.evaluate(X_test, y_test, verbose=0)
-    print("Mean Squared Error for test data:", mse)
-    print("Mean Absolute Error:", mae)
+    print("Mean Squared Error for test data:", mse, flush=True)
+    print("Mean Absolute Error:", mae, flush=True)
 
     return pos, final_model
