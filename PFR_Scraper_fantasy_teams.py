@@ -28,6 +28,10 @@ class DataScraper:
             df['Year'] = str(year)
             return df
 
+            parse_only = SoupStrainer('table')
+            soup = BeautifulSoup(response_text, 'lxml', parse_only=parse_only)
+            tables = soup.find_all('table')
+
     def scrape_player_data(self) -> pd.DataFrame:
         with ThreadPoolExecutor() as executor:
             player_data_frames = list(executor.map(self.scrape_data, self.player_urls))
