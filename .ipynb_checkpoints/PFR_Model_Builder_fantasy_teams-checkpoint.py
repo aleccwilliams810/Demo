@@ -54,7 +54,7 @@ def create_and_evaluate_model(pos, merged_data_scaled, param_grid, n_folds, n_fe
         verbose=0,
         dropout_rate = .1
     )
-    grid = GridSearchCV(estimator=model, param_grid=param_grid, n_jobs=-1, cv=cv, scoring='neg_mean_squared_error', backend='threading')
+    grid = GridSearchCV(estimator=model, param_grid=param_grid, n_jobs=-1, cv=n_folds, scoring='neg_mean_squared_error', backend='threading')
     grid_result = grid.fit(X_train, y_train)
 
     best_params = grid_result.best_params_
