@@ -127,6 +127,8 @@ class DataPreprocessor:
 def wrapper(args):
     return create_and_evaluate_model(*args)
 
-# Define a function that takes a single argument, and uses that to call create_and_evaluate_model
+# Define a function to handle the creation of processes
 def process_func(args):
-    return (args[0], create_and_evaluate_model(*args[1], **args[2]))
+    pos, merged_data_scaled, param_grid, n_folds, n_features = args
+    return (pos, create_and_evaluate_model(pos, merged_data_scaled, param_grid, n_folds, n_features, dropout_rate=0.1))
+
