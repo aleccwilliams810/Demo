@@ -70,4 +70,4 @@ def create_and_evaluate_model(pos, merged_data_scaled, param_grid, n_folds, n_fe
     print("Mean Squared Error for test data:", mse, flush=True)
     print("Mean Absolute Error:", mae, flush=True)
 
-    return pos, final_model, X_train, y_train, y_test, X_test
+    return pos, final_model, y_test, X_test
