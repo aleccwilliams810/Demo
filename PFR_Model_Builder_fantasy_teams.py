@@ -52,7 +52,6 @@ def create_and_evaluate_model(pos, merged_data_scaled, param_grid, n_folds, n_fe
         epochs=100,
         batch_size=10,
         verbose=0,
-        **kwargs
     )
     grid = GridSearchCV(estimator=model, param_grid=param_grid, cv=n_folds, n_jobs=-1, scoring='neg_mean_squared_error')
     grid_result = grid.fit(X_train, y_train)
